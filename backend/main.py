@@ -16,6 +16,9 @@ from routes import auth, ai, destinations, user, weather, agent
 load_dotenv()
 
 app = FastAPI(title="Roamly API", version="1.0.0")
+@app.get("/")
+def home():
+    return {"message": "Roamly backend is running 🚀"}
 
 
 limiter = Limiter(key_func=get_remote_address, default_limits=["100/15minutes"])
