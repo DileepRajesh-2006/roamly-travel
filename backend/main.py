@@ -18,9 +18,7 @@ app = FastAPI(title="Roamly API", version="1.0.0")
 db_client: AsyncIOMotorClient | None = None
 
 # --- CORE LIVENESS & HEALTH ROUTES ---
-@app.options("/{rest_of_path:path}")
-async def preflight_handler(rest_of_path: str):
-    return {"message": "ok"}
+
 
 @app.get("/")
 def home():
