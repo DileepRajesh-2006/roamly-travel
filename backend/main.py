@@ -1,5 +1,5 @@
 import os
-from fastapi import FastAPI
+from fastapi import FastAPI, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -15,8 +15,6 @@ load_dotenv()
 
 app = FastAPI(title="Roamly API", version="1.0.0")
 
-# --- GLOBAL STORAGE FOR DB CLIENT ---
-# This allows us to access the client across the app and close it on shutdown
 db_client: AsyncIOMotorClient | None = None
 
 # --- CORE LIVENESS & HEALTH ROUTES ---
@@ -28,35 +26,46 @@ def home():
 
 @app.get("/api/health")
 def health_check():
-    # Render-optimized liveness probe (lightweight and lightning fast)
     return {"status": "ok", "service": "roamly"}
 
 # -------------------------------------
 
-# Rate Limiter Configuration
-limiter = Limiter(key_func=get_remote_address, default_limits=["100/15minutes"])
+# Rate Limiter: Configured with a custom request checker to ignore OPTIONS
+def custom_rate_limit_checker(request: Request):
+    # Completely bypass rate limiting for browser pre-flight checks
+    if request.method == "OPTIONS":
+        return None
+    return get_remote_address(request)
+
+limiter = Limiter(key_func=custom_rate_limit_checker, default_limits=["100/15minutes"])
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Predictable, Production-Safe CORS Setup
-if not os.getenv("FRONTEND_URL"):
-    print("⚠️ FRONTEND_URL not set — CORS will be restrictive only for localhost")
-
 allowed_origins = [
     "http://localhost:3000",
     "http://localhost:5173",
 ]
 
-if os.getenv("FRONTEND_URL"):
-    allowed_origins.append(os.getenv("FRONTEND_URL"))
+frontend_url = os.getenv("FRONTEND_URL")
+if frontend_url:
+    # Ensure no trailing slash messes up the match
+    allowed_origins.append(frontend_url.rstrip("/"))
+else:
+    print("⚠️ FRONTEND_URL not set — CORS will be restrictive only for localhost")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], # Explicitly include OPTIONS
     allow_headers=["*"],
 )
+
+# Explicitly catch global OPTIONS requests if middleware doesn't absorb them
+@app.options("/{path:path}")
+async def preflight_handler(path: str):
+    return Response(status_code=200)
 
 # --- APPLICATION LIFECYCLE HOOKS ---
 
@@ -65,20 +74,15 @@ async def startup_db():
     global db_client
     uri = os.getenv("MONGODB_URI")
     if not uri:
-        raise RuntimeError("CRITICAL STARTUP FAILURE: MONGODB_URI is missing from environment variables.")
+        raise RuntimeError("CRITICAL STARTUP FAILURE: MONGODB_URI is missing.")
 
     try:
-        # Motor internally handles retries for brief network fluctuations
         db_client = AsyncIOMotorClient(uri)
         db = db_client.get_database("roamly")
-        
         await init_beanie(database=db, document_models=[User])
         print("✅ MongoDB connected and Beanie initialized securely")
-        
     except Exception as e:
         print("❌ CRITICAL: Database connection failed during startup loop!")
-        print(f"Error Details: {e}")
-        # Fail-fast to protect live traffic via Render's deployment safety mechanism
         raise e
 
 
@@ -88,8 +92,6 @@ async def shutdown_db():
     if db_client:
         print("🛑 Closing MongoDB connection pool gracefully...")
         db_client.close()
-
-# -------------------------------------
 
 # Include Routers
 app.include_router(auth.router,         prefix="/api/auth")
@@ -103,7 +105,6 @@ from routes.analytics import router as analytics_router
 app.include_router(analytics_router, prefix="/api/admin")
 
 
-# Local debugging utility (Ignored by Render)
 if __name__ == "__main__":
     import uvicorn
     port = int(os.getenv("PORT", 5000))
