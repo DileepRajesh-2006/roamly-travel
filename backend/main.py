@@ -18,6 +18,9 @@ app = FastAPI(title="Roamly API", version="1.0.0")
 db_client: AsyncIOMotorClient | None = None
 
 # --- CORE LIVENESS & HEALTH ROUTES ---
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(rest_of_path: str):
+    return {"message": "ok"}
 
 @app.get("/")
 def home():
@@ -54,11 +57,17 @@ if frontend_url:
 else:
     print("⚠️ FRONTEND_URL not set — CORS will be restrictive only for localhost")
 
+from fastapi.middleware.cors import CORSMiddleware
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=allowed_origins,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "https://roamly-travel-iota.vercel.app"
+    ],
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"], # Explicitly include OPTIONS
+    allow_methods=["*"],
     allow_headers=["*"],
 )
 
