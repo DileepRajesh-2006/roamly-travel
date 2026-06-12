@@ -33,14 +33,14 @@ export default function Contact() {
                 <MapPin className="mt-1 text-sand-400" size={20} />
                 <div>
                   <h3 className="font-display text-xl text-sand-100">Location</h3>
-                  <p className="mt-1 text-sand-400">Visakhapatnam, Andhra Pradesh, India</p>
+                  <p className="mt-1 text-sand-400">Remote · Built for the world 🌍</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
                 <Mail className="mt-1 text-sand-400" size={20} />
                 <div>
                   <h3 className="font-display text-xl text-sand-100">Email</h3>
-                  <p className="mt-1 text-sand-400">alladileeprajesh.23.cse@anits.edu.in</p>
+                  <p className="mt-1 text-sand-400">hello@roamly.ai</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
