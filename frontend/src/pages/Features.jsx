@@ -23,18 +23,25 @@ const TOOLS = [
     run: (value) => vibeSearch(value),
     desc: 'Describe a feeling, not a place. Roamly translates mood into destinations.',
   },
-  {
-    icon: Swords,
-    title: 'Destination Battle',
-    badge: 'Compare',
-    route: '/battle',
-    placeholder: 'Japan vs South Korea for a 10-day first trip',
-    run: (value) => {
-      const [optionA, optionB] = value.split(' vs ').map((item) => item?.trim()).filter(Boolean);
-      return destinationBattle({ optionA: optionA || value, optionB: optionB || 'Italy' });
-    },
-    desc: 'Put two destinations head-to-head and let AI argue both sides.',
+{
+  icon: Swords,
+  title: 'Destination Battle',
+  badge: 'Compare',
+  route: '/battle',
+  placeholder: 'Japan vs South Korea for a 10-day first trip',
+  run: (value) => {
+    const [optionA, optionB] = value
+      .split(' vs ')
+      .map((item) => item?.trim())
+      .filter(Boolean);
+
+    return destinationBattle({
+      destination1: optionA || value,
+      destination2: optionB || 'Italy'
+    });
   },
+  desc: 'Put two destinations head-to-head and let AI argue both sides.',
+},
   {
     icon: Briefcase,
     title: 'Trip Roast',
