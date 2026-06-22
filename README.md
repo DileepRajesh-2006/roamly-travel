@@ -1,152 +1,192 @@
-# 🌍 Roamly – AI-Powered Travel Companion (Backend)
+# 🌍 Roamly – AI-Powered Travel Companion
 
-> FastAPI-powered backend for Roamly, an AI-driven travel planning platform that provides personalized recommendations, itinerary generation, travel analytics, budget insights, and intelligent travel assistance.
+> **Explore Smarter. Travel Better.**
 
----
+Roamly is an AI-powered travel planning platform that helps travelers discover destinations, generate personalized itineraries, analyze travel preferences, optimize budgets, and receive intelligent travel recommendations.
 
-## 🚀 Overview
-
-Roamly is an AI-powered travel companion designed to help users plan smarter trips through personalized recommendations, travel preference analysis, itinerary generation, destination exploration, and budget optimization.
-
-This repository contains the backend services built with **FastAPI**, **MongoDB**, and **Google Gemini AI**, providing secure APIs, authentication, user management, and AI-powered travel features.
+Built using **React**, **FastAPI**, **MongoDB**, and **Google Gemini AI**, Roamly combines modern web technologies with artificial intelligence to create a smarter and more personalized travel experience.
 
 ---
 
-## ✨ Core Features
+# ✨ Features
 
-### 🤖 AI Travel Assistant
+## 🤖 AI Travel Assistant
 
-* AI-powered travel concierge
-* Smart travel recommendations
-* Interactive travel planning support
+* Interactive AI travel concierge
+* Personalized travel recommendations
+* Smart travel planning assistance
+* Context-aware travel suggestions
 
-### 📅 AI Itinerary Generator
+## 🧬 Travel DNA Analysis
 
-* Personalized trip schedules
-* Day-wise activity planning
-* Destination-specific recommendations
+* Analyze travel personality and preferences
+* Generate unique traveler profiles
+* Personalized destination matching
+* AI-driven travel insights
 
-### 🧬 Travel DNA Analysis
+## 🗺️ Destination Explorer
 
-* Travel personality assessment
-* Preference-based destination matching
-* Personalized travel insights
+* Explore destinations worldwide
+* Discover nearby attractions and landmarks
+* Country information lookup
+* Geolocation-based recommendations
 
-### 💰 Budget Truth Analyzer
+## 📅 AI Itinerary Generator
 
-* Travel expense estimation
-* Budget optimization suggestions
-* Cost breakdown analysis
+* Generate complete travel plans instantly
+* Day-wise activity schedules
+* Attraction recommendations
+* Customized trip planning
 
-### ⚔️ Destination Battle
+## 💰 Budget Truth Analyzer
+
+* Realistic travel cost estimation
+* Budget breakdown analysis
+* Expense optimization suggestions
+
+## ⚔️ Destination Battle
 
 * Compare destinations side-by-side
-* AI-generated travel recommendations
+* AI-generated recommendations
+* Travel decision support
 
-### 🔥 Trip Roast
+## 🔥 Trip Roast
 
-* Fun and engaging AI travel critiques
+* Fun AI-powered travel critiques
+* Entertainment-focused travel analysis
 
-### 🤔 What-If Travel Simulator
+## 🤔 Travel What-If Simulator
 
-* Alternative trip scenarios
-* Dynamic travel planning suggestions
+* Explore alternative travel scenarios
+* Dynamic itinerary suggestions
+* Flexible travel planning
 
-### 🗺️ Destination Services
+## 📊 Analytics Dashboard
 
-* Destination exploration
-* Nearby places discovery
-* Country information lookup
-* Geolocation support
+* User travel statistics
+* Activity tracking
+* Personalized travel insights
+* Historical travel analysis
 
-### 🔐 Secure Authentication
+## 🔐 Authentication System
 
 * JWT-based authentication
-* User registration and login
+* Secure user registration and login
 * Protected routes
-* Password hashing with bcrypt
+* Profile management
 
 ---
 
-## 🏗️ Technology Stack
-
-| Technology       | Purpose                        |
-| ---------------- | ------------------------------ |
-| FastAPI          | API Framework                  |
-| MongoDB          | Database                       |
-| Beanie ODM       | MongoDB Object Document Mapper |
-| Motor            | Async MongoDB Driver           |
-| JWT              | Authentication                 |
-| bcrypt           | Password Security              |
-| Google Gemini AI | AI Services                    |
-| HTTPX            | Async HTTP Requests            |
-| SlowAPI          | Rate Limiting                  |
-
----
-
-## 📂 Project Structure
+# 🏗️ Project Architecture
 
 ```text
-backend/
+Roamly
 │
-├── routes/             # API Routes
-├── models/             # Database Models
-├── middleware/         # Authentication & Middleware
-├── services/           # Business Logic
-├── utils/              # Utility Functions
-├── config/             # Configuration
-├── main.py             # Application Entry Point
-├── requirements.txt
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── context/
+│   │   └── api/
+│
+├── backend/
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   ├── services/
+│   ├── utils/
+│   └── main.py
+│
 └── README.md
 ```
 
 ---
 
-## 📋 Prerequisites
+# 🛠️ Technology Stack
 
-Before running the application, ensure you have:
+## Frontend
+
+| Technology      | Purpose                    |
+| --------------- | -------------------------- |
+| React 18        | User Interface Development |
+| Vite            | Build Tool                 |
+| Tailwind CSS    | Styling                    |
+| React Router    | Routing                    |
+| Axios           | API Communication          |
+| Framer Motion   | Animations                 |
+| Leaflet         | Maps Integration           |
+| Google Maps API | Location Services          |
+
+## Backend
+
+| Technology       | Purpose              |
+| ---------------- | -------------------- |
+| FastAPI          | API Framework        |
+| MongoDB          | Database             |
+| Beanie ODM       | MongoDB ODM          |
+| Motor            | Async MongoDB Driver |
+| JWT              | Authentication       |
+| bcrypt           | Password Hashing     |
+| Google Gemini AI | AI Features          |
+| HTTPX            | Async HTTP Requests  |
+| SlowAPI          | Rate Limiting        |
+
+---
+
+# 📋 Prerequisites
+
+Before running the project, ensure you have:
 
 * Python 3.10+
+* Node.js 18+
 * MongoDB
 * Google Gemini API Key
 * Git
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation
 
-### 1. Clone the Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/roamly.git
-cd roamly/backend
+cd roamly
 ```
 
-### 2. Create Virtual Environment
+---
 
-#### Windows
+## 2. Backend Setup
+
+Navigate to backend folder:
+
+```bash
+cd backend
+```
+
+Create virtual environment:
+
+### Windows
 
 ```bash
 python -m venv venv
 venv\Scripts\activate
 ```
 
-#### Linux / macOS
+### Linux/macOS
 
 ```bash
 python -m venv venv
 source venv/bin/activate
 ```
 
-### 3. Install Dependencies
+Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables
-
-Create a `.env` file in the backend directory:
+Create a `.env` file:
 
 ```env
 MONGODB_URI=your_mongodb_uri
@@ -154,13 +194,13 @@ JWT_SECRET=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
 ```
 
-### 5. Start the Server
+Run backend server:
 
 ```bash
 python main.py
 ```
 
-Server will run at:
+Backend URL:
 
 ```text
 http://localhost:5000
@@ -168,9 +208,37 @@ http://localhost:5000
 
 ---
 
-## 📡 API Endpoints
+## 3. Frontend Setup
 
-### Authentication
+Navigate to frontend folder:
+
+```bash
+cd frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+Frontend URL:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# 📡 API Endpoints
+
+## Authentication
 
 | Endpoint         | Method |
 | ---------------- | ------ |
@@ -179,7 +247,7 @@ http://localhost:5000
 | /api/auth/me     | GET    |
 | /api/auth/logout | POST   |
 
-### AI Services
+## AI Services
 
 | Endpoint              | Method |
 | --------------------- | ------ |
@@ -194,7 +262,7 @@ http://localhost:5000
 | /api/ai/packing-list  | POST   |
 | /api/ai/culture-coach | POST   |
 
-### Destination Services
+## Destination Services
 
 | Endpoint                        | Method |
 | ------------------------------- | ------ |
@@ -203,13 +271,13 @@ http://localhost:5000
 | /api/destinations/geocode       | GET    |
 | /api/destinations/country-info  | GET    |
 
-### Weather Services
+## Weather Services
 
 | Endpoint     | Method |
 | ------------ | ------ |
 | /api/weather | GET    |
 
-### User Services
+## User Services
 
 | Endpoint           | Method              |
 | ------------------ | ------------------- |
@@ -222,11 +290,11 @@ http://localhost:5000
 
 ---
 
-## 📖 Interactive API Documentation
+# 📖 API Documentation
 
-FastAPI automatically generates Swagger documentation.
+FastAPI automatically generates interactive Swagger documentation.
 
-Access it at:
+Visit:
 
 ```text
 http://localhost:5000/docs
@@ -234,52 +302,92 @@ http://localhost:5000/docs
 
 ---
 
-## 🔒 Security Features
+# 🔒 Security Features
 
 * JWT Authentication
-* Password Hashing using bcrypt
+* Password Hashing with bcrypt
 * Protected API Routes
 * Environment Variable Protection
-* Rate Limiting with SlowAPI
+* Rate Limiting using SlowAPI
 * Secure User Session Management
 
 ---
 
-## 🧪 Development
+# 🚀 Deployment
 
-Run the application in development mode:
+## Frontend
 
-```bash
-python main.py
-```
+* Vercel
+* Netlify
+* Cloudflare Pages
 
----
-
-## 🚀 Deployment
-
-Supported deployment platforms:
+## Backend
 
 * Render
 * Railway
 * AWS
 * DigitalOcean
-* Azure App Service
+* Azure App Services
 
 ---
 
-## 📈 Future Enhancements
+# 🌐 Live Demo
+
+### Frontend
+
+https://roamly-travel-iota.vercel.app/
+
+### Backend API
+
+https://roamly-api.onrender.com
+
+### API Documentation
+
+https://roamly-api.onrender.com/docs
+
+---
+
+# 📈 Future Enhancements
 
 * Flight Search Integration
 * Hotel Recommendations
 * Real-Time Booking Support
 * AI Voice Travel Assistant
-* Offline Travel Mode
+* Offline Itinerary Access
 * Multi-Language Support
-* Social Travel Community
+* Travel Community Features
+* Collaborative Trip Planning
 
 ---
 
-## 👨‍💻 Author
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a feature branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to GitHub
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open a Pull Request
+
+---
+
+# 👨‍💻 Author
 
 **Dileep Rajesh**
 
@@ -288,10 +396,10 @@ ANITS (Anil Neerukonda Institute of Technology and Sciences)
 
 ---
 
-## 📄 License
+# 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-### 🌟 Roamly — Explore Smarter, Travel Better.
+## 🌟 Roamly – Your Intelligent Travel Companion
